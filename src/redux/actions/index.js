@@ -8,9 +8,11 @@ export const getEmail = (email) => ({
   email,
 });
 
-export const saveExpensesGlobalState = (expenses) => ({
+export const saveExpensesGlobalState = (expenses, data) => ({
   type: ADD_EXPENSES,
-  expenses,
+  payload: { ...expenses,
+    exchangeRates: data,
+  },
 });
 
 export const requestAPI = () => ({ type: REQUEST_API });
@@ -28,4 +30,8 @@ export const fetchApi = () => async (dispatch) => {
   dispatch(addCurrence(coins));
 };
 
-// dispatch(saveExpensesGlobalState(coins));
+export const fetchAddExpenses = (expenses) => async (dispatch) => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  dispatch(saveExpensesGlobalState(expenses, data));
+};
