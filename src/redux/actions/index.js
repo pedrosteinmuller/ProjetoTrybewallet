@@ -1,9 +1,16 @@
-import { USER_EMAIL } from '../reducers/user';
-import { REQUEST_API, GET_COINS } from '../reducers/wallet';
+export const REQUEST_API = 'REQUEST_API';
+export const GET_COINS = 'GET_COINS';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const USER_EMAIL = 'USER_EMAIL';
 
 export const getEmail = (email) => ({
   type: USER_EMAIL,
   email,
+});
+
+export const saveExpensesGlobalState = (expenses) => ({
+  type: ADD_EXPENSES,
+  expenses,
 });
 
 export const requestAPI = () => ({ type: REQUEST_API });
@@ -20,3 +27,5 @@ export const fetchApi = () => async (dispatch) => {
   const coins = Object.keys(data).filter((e) => e !== 'USDT');
   dispatch(addCurrence(coins));
 };
+
+// dispatch(saveExpensesGlobalState(coins));

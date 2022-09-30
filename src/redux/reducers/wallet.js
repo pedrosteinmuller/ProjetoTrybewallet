@@ -1,12 +1,12 @@
+import { REQUEST_API, GET_COINS, ADD_EXPENSES } from '../actions';
+
 const INITIAL_STATE = {
   isLoading: false,
   currencies: [],
+  expenses: [],
 };
 
-export const REQUEST_API = 'REQUEST_API';
-export const GET_COINS = 'GET_COINS';
-
-export const wallet = (state = INITIAL_STATE, action) => {
+const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_API:
     return {
@@ -19,7 +19,14 @@ export const wallet = (state = INITIAL_STATE, action) => {
       currencies: action.coins,
       isLoading: false,
     };
+  case ADD_EXPENSES:
+    return {
+      ...state,
+      expenses: action.expenses,
+    };
   default:
     return state;
   }
 };
+
+export default wallet;
