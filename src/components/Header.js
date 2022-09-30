@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 class Header extends Component {
   calculateSum = () => {
     const { expenses } = this.props;
-    const value = expenses.reduce((acc, curr) => {
-      const expenseValue = curr.expense;
-      const asks = curr.exchangeRates[curr.currencyCoin].ask;
+    const valuee = expenses.reduce((acc, curr) => {
+      const expenseValue = curr.value;
+      const asks = curr.exchangeRates[curr.currency].ask;
       const mult = expenseValue * asks;
       return acc + Number(mult);
     }, 0);
-    return Number(value).toFixed(2);
+    return Number(valuee).toFixed(2);
   };
 
   render() {

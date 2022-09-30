@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchApi, fetchAddExpenses } from '../redux/actions';
+import { fetchAddExpenses } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -37,12 +37,11 @@ class WalletForm extends Component {
       expenseTag } = this.state;
     addExpenseToRedux({
       id,
-      expense,
-      expenseDescription,
-      currencyCoin,
-      payMethod,
-      expenseTag,
-    });
+      value: expense,
+      description: expenseDescription,
+      currency: currencyCoin,
+      method: payMethod,
+      tag: expenseTag });
     this.setState({
       expense: '',
       expenseDescription: '',
@@ -130,7 +129,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCoins: () => dispatch(fetchApi()),
   addExpenseToRedux: (info) => dispatch(fetchAddExpenses(info)),
 });
 

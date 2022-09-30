@@ -20,10 +20,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       isLoading: false,
     };
   case ADD_EXPENSES:
-    return {
-      ...state,
-      expenses: [...state.expenses, action.payload],
-    };
+    return { ...state, expenses: [...state.expenses, action.payload] };
   default:
     return state;
   }

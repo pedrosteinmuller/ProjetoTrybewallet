@@ -12,8 +12,7 @@ export const saveExpensesGlobalState = (expenses, data) => ({
   type: ADD_EXPENSES,
   payload: { ...expenses,
     exchangeRates: data,
-  },
-});
+  } });
 
 export const requestAPI = () => ({ type: REQUEST_API });
 
