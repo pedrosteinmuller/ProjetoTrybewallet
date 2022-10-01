@@ -66,6 +66,7 @@ class WalletForm extends Component {
         <input
           type="number"
           data-testid="value-input"
+          placeholder="Valor"
           value={ expense }
           name="expense"
           onChange={ (item) => this.handleInput(item) }
@@ -74,6 +75,7 @@ class WalletForm extends Component {
         <input
           type="text"
           data-testid="description-input"
+          placeholder="Descrição"
           value={ expenseDescription }
           name="expenseDescription"
           onChange={ (item) => this.handleInput(item) }
