@@ -116,7 +116,3 @@ describe('Testando aplicação do Trybewallet', () => {
     expect(buttonCategory).toHaveValue('Alimentação');
   });
 });
-//   it('Testando interação do usuário do select de categoria', () => {
-//     renderWithRouterAndRedux(<Wallet />);
-
-// });

@@ -6,7 +6,6 @@ import '../css/table.css';
 class Table extends Component {
   render() {
     const { expenses } = this.props;
-    // console.log(expenses);
     return (
       <table>
         <thead>
@@ -30,7 +29,27 @@ class Table extends Component {
                 <td>{item.tag}</td>
                 <td>{item.method}</td>
                 <td>{Number(item.value).toFixed(2)}</td>
-                {/* <td>{item.exchangeRates}</td> */}
+                <td>{item.exchangeRates[item.currency].name}</td>
+                <td>{Number(item.exchangeRates[item.currency].ask).toFixed(2)}</td>
+                <td>
+                  {
+                    Number((item.value) * (item.exchangeRates[item.currency].ask))
+                      .toFixed(2)
+                  }
+                </td>
+                <td>Real</td>
+                <td>
+                  <button
+                    type="button"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))
           }
