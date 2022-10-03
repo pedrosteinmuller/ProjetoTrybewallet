@@ -2,6 +2,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const GET_COINS = 'GET_COINS';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
 export const USER_EMAIL = 'USER_EMAIL';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const getEmail = (email) => ({
   type: USER_EMAIL,
@@ -13,6 +14,11 @@ export const saveExpensesGlobalState = (expenses, data) => ({
   payload: { ...expenses,
     exchangeRates: data,
   } });
+
+export const removeExpenseGlobalState = (expense) => ({
+  type: REMOVE_EXPENSE,
+  payload: expense,
+});
 
 export const requestAPI = () => ({ type: REQUEST_API });
 

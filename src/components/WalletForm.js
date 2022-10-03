@@ -145,7 +145,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addExpenseToRedux: (info) => dispatch(fetchAddExpenses(info)),
   fetchApiLogin: () => dispatch(fetchApi()),
-
 });
 
 WalletForm.propTypes = {

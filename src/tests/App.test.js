@@ -74,7 +74,6 @@ describe('Testando aplicação do Trybewallet', () => {
 
   test('Verifica se renderiza a despesa após clicar no botao adicionar despesa', async () => {
     renderWithRouterAndRedux(<Wallet />);
-    // renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] }
     const valueInput = screen.getByTestId('value-input');
     const descriptionInput = screen.getByTestId('description-input');
     const methodInput = screen.getByTestId('method-input');
@@ -114,5 +113,34 @@ describe('Testando aplicação do Trybewallet', () => {
     userEvent.selectOptions(buttonCategory, 'Alimentação');
 
     expect(buttonCategory).toHaveValue('Alimentação');
+  });
+});
+
+describe('Testando adicionar e remover despesas', () => {
+  it('Verifica a adição e a remoção das despesas conforme clicks dos botões', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({
+      json: async () => mockData,
+    }));
+
+    renderWithRouterAndRedux(<Wallet />);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    const inputDescription = screen.getByRole('textbox');
+    const btnAddExpense = screen.getByRole('button', {
+      name: /adicionar despesa/i,
+    });
+    const inputValue = screen.getByPlaceholderText(/valor/i);
+
+    userEvent.type(inputDescription, 'Comprar cerveja');
+    userEvent.type(inputValue, '100');
+    userEvent.click(btnAddExpense);
+
+    const buttonRemove = await screen.findAllByTestId('delete-btn');
+
+    expect(buttonRemove[0]).toBeInTheDocument();
+
+    userEvent.click(buttonRemove[0]);
+
+    expect(buttonRemove[0]).not.toBeInTheDocument();
   });
 });
