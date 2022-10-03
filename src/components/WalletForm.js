@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchAddExpenses } from '../redux/actions';
+import '../css/walletForm.css';
 
 class WalletForm extends Component {
   state = {
@@ -61,66 +62,72 @@ class WalletForm extends Component {
     const { currencies } = this.props;
 
     return (
-      <div>
-        Valor:
-        <input
-          type="number"
-          data-testid="value-input"
-          placeholder="Valor"
-          value={ expense }
-          name="expense"
-          onChange={ (item) => this.handleInput(item) }
-        />
-        Descrição:
-        <input
-          type="text"
-          data-testid="description-input"
-          placeholder="Descrição"
-          value={ expenseDescription }
-          name="expenseDescription"
-          onChange={ (item) => this.handleInput(item) }
-        />
-        Moeda:
-        <select
-          data-testid="currency-input"
-          value={ currencyCoin }
-          name="currencyCoin"
-          onChange={ (item) => this.handleInput(item) }
-        >
-          {
-            currencies.map((element, index) => <option key={ index }>{element}</option>)
-          }
-        </select>
-        Método de pagamento:
-        <select
-          data-testid="method-input"
-          value={ payMethod }
-          name="payMethod"
-          onChange={ (item) => this.handleInput(item) }
-        >
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
-        </select>
-        Categoria:
-        <select
-          data-testid="tag-input"
-          value={ expenseTag }
-          name="expenseTag"
-          onChange={ (item) => this.handleInput(item) }
-        >
-          <option>Alimentação</option>
-          <option>Lazer</option>
-          <option>Trabalho</option>
-          <option>Transporte</option>
-          <option>Saúde</option>
-        </select>
-        <button
-          type="button"
-          onClick={ this.handleButton }
-        >
-          Adicionar despesa
-        </button>
+      <div className="wallet-container">
+        <form className="form-container">
+          <div className="itens-wallet">
+            Valor
+            <input
+              type="number"
+              data-testid="value-input"
+              placeholder="Valor"
+              value={ expense }
+              name="expense"
+              onChange={ (item) => this.handleInput(item) }
+            />
+            Descrição
+            <input
+              type="text"
+              data-testid="description-input"
+              placeholder="Descrição"
+              value={ expenseDescription }
+              name="expenseDescription"
+              onChange={ (item) => this.handleInput(item) }
+            />
+            Moeda
+            <select
+              data-testid="currency-input"
+              value={ currencyCoin }
+              name="currencyCoin"
+              onChange={ (item) => this.handleInput(item) }
+            >
+              {
+                currencies.map((el, index) => <option key={ index }>{el}</option>)
+              }
+            </select>
+            Método de pagamento
+            <select
+              data-testid="method-input"
+              value={ payMethod }
+              name="payMethod"
+              onChange={ (item) => this.handleInput(item) }
+            >
+              <option>Dinheiro</option>
+              <option>Cartão de crédito</option>
+              <option>Cartão de débito</option>
+            </select>
+            Categoria
+            <select
+              data-testid="tag-input"
+              value={ expenseTag }
+              name="expenseTag"
+              onChange={ (item) => this.handleInput(item) }
+            >
+              <option>Alimentação</option>
+              <option>Lazer</option>
+              <option>Trabalho</option>
+              <option>Transporte</option>
+              <option>Saúde</option>
+            </select>
+            <div className="button-add-expense">
+              <button
+                type="button"
+                onClick={ this.handleButton }
+              >
+                Adicionar despesa
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     );
   }

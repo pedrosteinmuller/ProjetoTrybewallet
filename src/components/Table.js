@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class Table extends Component {
   render() {
     return (
-      <div>
-        <table>
-          <thead>
+      <table>
+        <thead>
+          <tr>
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -15,9 +15,9 @@ class Table extends Component {
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
-          </thead>
-        </table>
-      </div>
+          </tr>
+        </thead>
+      </table>
     );
   }
 }

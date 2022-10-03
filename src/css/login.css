@@ -1,0 +1,94 @@
+* {
+  padding: 0;
+}
+
+body , html {
+  background-image: linear-gradient(rgb(217, 236, 224), rgba(80, 235, 34, 0.61));
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.login-img {
+  margin-top: 5px;
+}
+
+.login {
+  align-items: center;
+  display: flex;
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  height: 100vh;
+  justify-content: center;
+}
+
+.card {
+  background-color: rgba(88, 76, 76, 0.877);
+  border-radius: 80px;
+  padding: 60px;
+
+  /* width: 250px; */
+}
+
+.login-place {
+  align-content: center;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+  opacity: 0.9;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.login-place:after {
+  background-color: white;
+  content: '';
+  display: block;
+  height: 2px;
+  margin-top: -18px;
+  width: 63px;
+}
+
+input {
+  border: none;
+  font-size: 15px;
+}
+
+.card-content-area {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.card-content-area input {
+  background-color: transparent;
+  border-bottom: 2px solid #e1e1e1;
+  height: 20px;
+  margin-top: 10px;
+  outline: none;
+}
+
+.button-place {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit {
+  height: 35px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  margin: 5px auto;
+  width: 250px;
+}
+
+.inputs::placeholder {
+  color: white;
+}

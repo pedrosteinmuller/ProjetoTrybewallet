@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
+// import mockData from './helpers/mockData';
 
 describe('Testando aplicação do Trybewallet', () => {
   it('Verifica se a tela de login', () => {
@@ -69,4 +70,17 @@ describe('Testando aplicação do Trybewallet', () => {
     expect(coinName).toBeInTheDocument();
     expect(screen.getAllByRole('option').length).toBe(8);
   });
+  // it('teste', () => {
+  //   global.fetch = jest.fn()
+  //     .mockResolvedValue({ json: jest.fn().mockResolvedValue(mockData) });
+  //   global.fetch = async () => ({ json: async () => mockData });
+  //   renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+
+  //   jest.spyOn(global, 'fetch').mockResolvedValue({
+  //     json: jest.fn().mockResolvedValue(mockData),
+  //   });
+  //   const titleEl = screen.getByTestId('currency-input', { name: /usd/i });
+  //   expect(titleEl).toBeInTheDocument();
+  //   expect(titleEl).toBeDefined();
+  // });
 });
