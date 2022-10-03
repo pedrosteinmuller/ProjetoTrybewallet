@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getEmail, fetchApi } from '../redux/actions';
+import { getEmail } from '../redux/actions';
 import '../css/login.css';
 import logoTrybeWallet from '../css/logoTrybeWallet.png';
 
@@ -28,10 +28,9 @@ class Login extends React.Component {
 
   handleButton = (event) => {
     event.preventDefault();
-    const { history, saveEmail, fetchApiLogin } = this.props;
+    const { history, saveEmail } = this.props;
     const { email } = this.state;
     saveEmail(email);
-    fetchApiLogin();
     history.push('/carteira');
   };
 
@@ -88,12 +87,10 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveEmail: (email) => dispatch(getEmail(email)),
-  fetchApiLogin: () => dispatch(fetchApi()),
 });
 
 Login.propTypes = {
   saveEmail: PropTypes.func.isRequired,
-  fetchApiLogin: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,

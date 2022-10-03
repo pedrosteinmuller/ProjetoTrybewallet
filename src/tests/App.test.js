@@ -1,9 +1,10 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
-// import mockData from './helpers/mockData';
+import Wallet from '../pages/Wallet';
+import mockData from './helpers/mockData';
 
 describe('Testando aplicação do Trybewallet', () => {
   it('Verifica se a tela de login', () => {
@@ -70,17 +71,52 @@ describe('Testando aplicação do Trybewallet', () => {
     expect(coinName).toBeInTheDocument();
     expect(screen.getAllByRole('option').length).toBe(8);
   });
-  // it('teste', () => {
-  //   global.fetch = jest.fn()
-  //     .mockResolvedValue({ json: jest.fn().mockResolvedValue(mockData) });
-  //   global.fetch = async () => ({ json: async () => mockData });
-  //   renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
 
-  //   jest.spyOn(global, 'fetch').mockResolvedValue({
-  //     json: jest.fn().mockResolvedValue(mockData),
-  //   });
-  //   const titleEl = screen.getByTestId('currency-input', { name: /usd/i });
-  //   expect(titleEl).toBeInTheDocument();
-  //   expect(titleEl).toBeDefined();
-  // });
+  test('Verifica se renderiza a despesa após clicar no botao adicionar despesa', async () => {
+    renderWithRouterAndRedux(<Wallet />);
+    // renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] }
+    const valueInput = screen.getByTestId('value-input');
+    const descriptionInput = screen.getByTestId('description-input');
+    const methodInput = screen.getByTestId('method-input');
+    const addExpense = screen.getByRole('button', {
+      name: /adicionar despesa/i,
+    });
+
+    userEvent.selectOptions(methodInput, 'Dinheiro');
+
+    userEvent.type(valueInput, '');
+    userEvent.type(descriptionInput, 'gasolina');
+    userEvent.click(addExpense);
+    const textOnScreen = await screen.findByText(/gasolina/i);
+
+    expect(valueInput.value).toBe('');
+
+    expect(textOnScreen).toBeVisible();
+  });
+  it('Testando interação do usuário no select moeda e categoria', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({
+      json: async () => mockData,
+    }));
+
+    renderWithRouterAndRedux(<Wallet />);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    const buttonSelect = screen.getByRole('combobox', {
+      name: /moeda/i,
+    });
+
+    await waitFor(() => expect(buttonSelect).toHaveValue('USD'));
+
+    userEvent.selectOptions(buttonSelect, 'USD');
+
+    const buttonCategory = screen.getByRole('combobox', {
+      name: /categoria/i,
+    });
+    userEvent.selectOptions(buttonCategory, 'Alimentação');
+
+    expect(buttonCategory).toHaveValue('Alimentação');
+  });
 });
+//   it('Testando interação do usuário do select de categoria', () => {
+//     renderWithRouterAndRedux(<Wallet />);
+
+// });
