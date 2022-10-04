@@ -116,7 +116,7 @@ describe('Testando aplicação do Trybewallet', () => {
   });
 });
 
-describe('Testando adicionar e remover despesas', () => {
+describe('Testando adicionar, remover, editar despesas', () => {
   it('Verifica a adição e a remoção das despesas conforme clicks dos botões', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(async () => ({
       json: async () => mockData,
@@ -129,7 +129,7 @@ describe('Testando adicionar e remover despesas', () => {
     const btnAddExpense = screen.getByRole('button', {
       name: /adicionar despesa/i,
     });
-    const inputValue = screen.getByPlaceholderText(/valor/i);
+    const inputValue = screen.getByPlaceholderText(/quanto gastou/i);
 
     userEvent.type(inputDescription, 'Comprar cerveja');
     userEvent.type(inputValue, '100');
@@ -142,5 +142,44 @@ describe('Testando adicionar e remover despesas', () => {
     userEvent.click(buttonRemove[0]);
 
     expect(buttonRemove[0]).not.toBeInTheDocument();
+  });
+  it('Verifica edição da despesa', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({
+      json: async () => mockData,
+    }));
+
+    renderWithRouterAndRedux(<Wallet />);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    const inputDescription = screen.getByRole('textbox');
+    const btnAddExpense = screen.getByRole('button', {
+      name: /adicionar despesa/i,
+    });
+    const inputValue = screen.getByPlaceholderText(/quanto gastou/i);
+
+    userEvent.type(inputDescription, 'Compra de uma caixa de cerveja');
+    userEvent.type(inputValue, '30');
+    userEvent.click(btnAddExpense);
+
+    const buttonEdit = await screen.findAllByTestId('edit-btn');
+
+    expect(buttonEdit[0]).toBeInTheDocument();
+
+    userEvent.click(buttonEdit[0]);
+
+    const buttonEditExpense = await screen.findByRole('button', {
+      name: 'Editar despesa',
+    });
+
+    expect(buttonEditExpense).toBeInTheDocument();
+
+    userEvent.type(inputValue, '10');
+    userEvent.type(inputDescription, 'Comprar pao com mortadela');
+
+    userEvent.click(buttonEditExpense);
+
+    const expUpdated = await screen.findByText('Comprar pao com mortadela');
+
+    expect(expUpdated).toBeInTheDocument();
   });
 });

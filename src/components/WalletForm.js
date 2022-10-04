@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAddExpenses, fetchApi } from '../redux/actions';
+import { fetchAddExpenses, fetchApi, editExpense } from '../redux/actions';
 import '../css/walletForm.css';
 
 class WalletForm extends Component {
@@ -25,7 +25,7 @@ class WalletForm extends Component {
   };
 
   handleButton = () => {
-    const { addExpenseToRedux } = this.props;
+    const { addExpenseToRedux, idToEdit, editExp, editor } = this.props;
     this.setState((state) => ({
       id: state.id + 1,
     }));
@@ -36,13 +36,25 @@ class WalletForm extends Component {
       currencyCoin,
       payMethod,
       expenseTag } = this.state;
-    addExpenseToRedux({
-      id,
-      value: expense,
-      description: expenseDescription,
-      currency: currencyCoin,
-      method: payMethod,
-      tag: expenseTag });
+    if (editor === false) {
+      addExpenseToRedux({
+        id,
+        value: expense,
+        description: expenseDescription,
+        currency: currencyCoin,
+        method: payMethod,
+        tag: expenseTag,
+      });
+    } else {
+      editExp({
+        id: idToEdit,
+        value: expense,
+        description: expenseDescription,
+        currency: currencyCoin,
+        method: payMethod,
+        tag: expenseTag,
+      });
+    }
     this.setState({
       expense: '',
       expenseDescription: '',
@@ -59,8 +71,7 @@ class WalletForm extends Component {
       currencyCoin,
       payMethod,
       expenseTag } = this.state;
-    const { currencies } = this.props;
-
+    const { currencies, editor } = this.props;
     return (
       <form className="form-container">
         <div className="itens-wallet">
@@ -129,7 +140,7 @@ class WalletForm extends Component {
               type="button"
               onClick={ this.handleButton }
             >
-              Adicionar despesa
+              { editor === true ? 'Editar despesa' : 'Adicionar despesa' }
             </button>
           </div>
         </div>
@@ -140,17 +151,24 @@ class WalletForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addExpenseToRedux: (info) => dispatch(fetchAddExpenses(info)),
   fetchApiLogin: () => dispatch(fetchApi()),
+  editExp: (exp) => dispatch(editExpense(exp)),
 });
 
 WalletForm.propTypes = {
   currencies: PropTypes.instanceOf(Array).isRequired,
   addExpenseToRedux: PropTypes.func.isRequired,
   fetchApiLogin: PropTypes.func.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  editor: PropTypes.bool.isRequired,
+  editExp: PropTypes.func.isRequired,
 };
 
 // https://reactjs.org/docs/typechecking-with-proptypes.html

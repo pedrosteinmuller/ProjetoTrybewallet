@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../css/header.css';
 import logoTrybeWallet from '../css/logoTrybeWallet.png';
+import logoExpense from '../css/Vector.png';
 import userIcon from '../css/user-circle-solid.png';
 
 class Header extends Component {
@@ -36,6 +37,9 @@ class Header extends Component {
         </div>
         <div className="value-expense">
           <div className="itens">
+            <div className="expense-logo">
+              <img src={ logoExpense } alt="Logo despesa" />
+            </div>
             <p>Total de despesas:</p>
             <p className="values" data-testid="total-field">{ this.calculateSum()}</p>
             <p className="values" data-testid="header-currency-field">BRL</p>

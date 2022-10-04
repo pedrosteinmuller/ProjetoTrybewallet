@@ -35,3 +35,7 @@
   border-radius: 50%;
   height: 40px;
 }
+
+.expense-logo {
+  margin: 0 8px;
+}

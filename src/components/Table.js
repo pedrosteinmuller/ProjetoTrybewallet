@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeExpenseGlobalState } from '../redux/actions';
+import { removeExpenseGlobalState, verifyEdit } from '../redux/actions';
 import '../css/table.css';
 
 class Table extends Component {
+  handleClickToEdit = (expense) => {
+    const idToEdit = expense.id;
+    const { activeEditExp } = this.props;
+    activeEditExp(idToEdit);
+  };
+
   render() {
     const { expenses, removeExpense } = this.props;
     return (
@@ -42,6 +48,8 @@ class Table extends Component {
                 <td>
                   <button
                     type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.handleClickToEdit(item) }
                   >
                     Editar
                   </button>
@@ -68,6 +76,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeExpense: (exp) => dispatch(removeExpenseGlobalState(exp)),
+  activeEditExp: (exp) => dispatch(verifyEdit(exp)),
 });
 
 Table.propTypes = {
