@@ -68,7 +68,7 @@ class WalletForm extends Component {
           <input
             type="number"
             data-testid="value-input"
-            placeholder="Valor"
+            placeholder="Quanto gastou"
             value={ expense }
             name="expense"
             onChange={ (item) => this.handleInput(item) }
@@ -77,7 +77,7 @@ class WalletForm extends Component {
           <input
             type="text"
             data-testid="description-input"
-            placeholder="Descrição"
+            placeholder="Descreva a sua despesa"
             value={ expenseDescription }
             name="expenseDescription"
             onChange={ (item) => this.handleInput(item) }
@@ -123,9 +123,9 @@ class WalletForm extends Component {
               <option>Saúde</option>
             </select>
           </label>
-
-          <div className="button-add-expense">
+          <div>
             <button
+              className="btn-efeito"
               type="button"
               onClick={ this.handleButton }
             >
