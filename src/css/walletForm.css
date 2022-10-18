@@ -21,3 +21,7 @@ button {
   font-weight: 600;
   padding: 6px 20px;
 }
+
+.btn-efeito:hover {
+  background-color: aqua;
+}

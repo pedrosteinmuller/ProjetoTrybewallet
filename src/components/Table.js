@@ -49,6 +49,7 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
+                    className="btn-edit"
                     onClick={ () => this.handleClickToEdit(item) }
                   >
                     Editar
@@ -56,6 +57,7 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="delete-btn"
+                    className="btn-remove"
                     onClick={ () => removeExpense(item.id) }
                   >
                     Excluir

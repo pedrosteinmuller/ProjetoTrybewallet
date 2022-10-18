@@ -30,3 +30,15 @@ tr:hover:nth-child( 1n + 1 ) {
   background-color: #085f63;
   color: white;
 }
+
+.btn-edit {
+  background-color: rgb(123, 123, 146);
+}
+
+.btn-edit:hover {
+  background-color: aqua;
+}
+
+.btn-remove:hover {
+  background-color: aqua;
+}
